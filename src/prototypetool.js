@@ -43,11 +43,11 @@ function createToolPalette(){
     document.body.appendChild(toolPalette);
 }
 
-function createBoard(){
-	var board = document.createElement("div");
-	board.setAttribute("id", "board");
+function createData(){
+	var data = document.createElement("div");
+	data.setAttribute("id", "data");
 
-	document.body.appendChild(board);
+	document.body.appendChild(data);
 
 	var linkoverlay = document.createElementNS("http://www.w3.org/2000/svg","svg");
 	linkoverlay.setAttribute("id","linkoverlay");
@@ -308,7 +308,7 @@ function pictureSelected(inputField){
 	  newDiv.appendChild(newImg);
 
 	  //add nem element
-	  document.getElementById("board").appendChild(newDiv);
+	  document.getElementById("data").appendChild(newDiv);
 
 	  refreshDraggable();
 	}, false);
