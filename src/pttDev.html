@@ -1,8 +1,7 @@
-<html>
-	<head>
-	  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  		<script>
+<html __wid="ZuY3v57i"><head __wid="acWXySIb">
+      <script src="https://code.jquery.com/jquery-1.12.4.js" __wid="OuLNVP0B"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" __wid="MV_-xYae"></script>
+      <script __wid="x6rP6RZh">
         function createToolPalette(){
   
     var toolPalette = document.createElement("div");
@@ -300,11 +299,28 @@ function pictureSelected(inputField){
   var newImg = document.createElement('img');
 
   var file    = inputField.files[0];
-  var reader  = new FileReader();
+  //var reader  = new FileReader();
+  //reader.addEventListener("load", function () {
 
-  reader.addEventListener("load", function () {
-    newImg.src = reader.result;
-    newImg.style.maxWidth = "500px";
+  var formData = new FormData();
+  formData.append("file", file, file.name);
+  
+  var req = new XMLHttpRequest();
+  req.open("POST", window.location.pathname);
+  req.send(formData);
+  req.onload = function(e) {
+    //var img = document.createElement("img");
+      //img.style.width = "100%";
+      //img.setAttribute("src", file.name);
+      //document.querySelector("#images").appendChild(img);
+  
+
+  
+
+    //newImg.src = reader.result;
+    newImg.setAttribute("src", file.name);
+
+    newImg.style.maxWidth = "200px";
     newImg.style.height = "auto";
     var newDiv = document.createElement('div');
     newDiv.classList.add('imgcontainer');
@@ -316,11 +332,12 @@ function pictureSelected(inputField){
     document.getElementById("data").appendChild(newDiv);
 
     refreshDraggable();
-  }, false);
+  };
+  //}, false);
 
-  if (file) {
-    reader.readAsDataURL(file);
-  }
+  //if (file) {
+  //  reader.readAsDataURL(file);
+  //}
 
 }
 
@@ -402,16 +419,73 @@ function screenSelectedForDelete(){
   document.getElementById("deleteScreenButton").innerHTML = "Delete Screen";
 }
       </script>
-  		<script>
-  			window.onload = function () {
-  				createToolPalette();
-  				createData();
-  			};
-  			
-  			//createBoard();
-  		</script>
-  		<link rel="stylesheet" type="text/css" href="prototypetool.css">
-  	</head>
-  	<body>
-  	</body>
-</html>
+      <script __wid="PuhFk-BF">
+        webstrate.on("loaded", function () {
+          if(!document.getElementById("data")){
+            createToolPalette();
+            createData();
+          }
+        });
+        
+      </script>
+      <style __wid="-c9WGfsG">
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+  #data{
+    width: 100%;
+    height: 100%; 
+  }
+
+  svg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width:100%;
+    height: 100%;
+    z-index:3;
+    pointer-events:none;
+    stroke:rgb(255,0,0);
+    stroke-width:2
+  }
+
+   .imgcontainer{
+    border: 2px solid black;
+    display:inline-block;
+    padding: 4px;
+  }
+  
+  .linkbutton{
+    width: 5em;
+    height: 5em;
+    border: 2px solid red;
+    z-index: 3;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    resize: both;
+    padding: 4px;
+  }
+
+   .selectable{
+    border-width: 6px;
+    box-shadow:0 0 20px grey;
+    padding: 0px;
+  }
+
+  #tool-palette {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    transition: opacity 250ms;
+  }
+</style>
+
+    </head>
+    <body __wid="UUgHsVRy" style="cursor: auto;">
+    
+
+</body></html>
